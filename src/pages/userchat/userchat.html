@@ -1,0 +1,45 @@
+<!--
+  Generated template for the UserchatPage page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar text-center color="primary">
+    <ion-title>User Chat</ion-title>
+  </ion-navbar>
+
+</ion-header>
+<ion-content #content padding>
+  <div>
+    <ion-list  *ngFor="let message of messages" color="primary">
+      <ion-item no-padding no-lines text-wrap  style="background-color:#e0e0e0;border-radius:10px;padding:4px;">
+       {{message}}
+      </ion-item>
+      <!--<ion-list margin-left>
+        
+        <button text-wrap *ngFor="let suggestion of suggestions" ion-button large color="buttonGreyColor" [ngClass]="(this.isFullWidthButton == false) ? 'buttonClass1' : 'buttonClass2'" 
+          (click)="suggestionButtonClick(suggestion);"><b>{{suggestion}}</b></button>
+        
+      </ion-list> -->
+    </ion-list>
+  </div>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-row margin-left>
+      <ion-input class="textField" (keydown)="onKeyDown($event, chat_input);" type="text" text-wrap [(ngModel)]="chat_input" placeholder="Message....."></ion-input>
+      <!--<button ion-fab color="sendButtonColor" (click)="sendMessage(chat_input);"><ion-icon  name="ios-send-outline"></ion-icon></button>-->
+     <ion-buttons end >
+      <button ion-button small style="padding-right:20px;"  (click)="sendMessage(chat_input);">
+        <ion-icon color="primary" name="ios-send-outline" ></ion-icon>
+      </button>
+    </ion-buttons>   
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>
+
+
+
+

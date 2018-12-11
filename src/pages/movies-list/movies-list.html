@@ -1,0 +1,105 @@
+<ion-header>
+	<ion-navbar color="primary">
+		<ion-title>{{title}}</ion-title>
+	</ion-navbar>
+
+	<ion-toolbar>
+		<ion-segment [(ngModel)]="movies" color="primary">
+			<ion-segment-button value="current" (ionSelect)="selectedNowPlaying($event,movies);">
+				In Theatres
+			</ion-segment-button>
+			<ion-segment-button value="upcoming" (ionSelect)="selectedUpcoming($event,movies);">
+				Upcoming
+			</ion-segment-button>
+		</ion-segment>
+	</ion-toolbar>
+</ion-header>
+<ion-content>
+	<div [ngSwitch]="movies">
+		<ion-list *ngSwitchCase="'upcoming'">
+			<ion-item class="item" style="padding-top:6px;" *ngFor="let movie of upcomingMoviesData" text-wrap>
+				<ion-row>
+					<ion-col width-30 (click)="showMovieDetails(movie.id,movie.release_date,'Releasing')">
+						<img src="http://image.tmdb.org/t/p/w342{{movie.poster_path}}" />
+					</ion-col>
+					<ion-col width-70>
+						<h2>{{movie.title}}</h2>
+						<button block clear color="dark" ion-button small><ion-icon ios="ios-calendar-outline" name='calendar'></ion-icon>&nbsp;Releasing on {{movie.release_date | date: 'dd MMM yy'}}</button>
+						<button block ion-button outline small (click)="openTrailerView($event,movie.id)"><ion-icon name='ios-play-outline'></ion-icon>&nbsp;Trailer</button>
+						<button block margin-top outline ion-button small (click)="showMovieDetails(movie.id,movie.release_date,'Releasing')"><ion-icon name='ios-information-circle-outline'></ion-icon>&nbsp;Details</button>
+						<ion-row no-padding>
+							<ion-col width-50>
+								<!--<button ion-button clear item-right icon-left small (click)="likeClicked($event);" *ngFor="let like of movie.likes_fb | async">
+						<ion-icon name = "heart-outline"></ion-icon>
+						{{like.likes}}
+				</button>-->
+
+								<button ion-button clear item-right icon-left small (click)="postLikeForCurrentMovies(like.likes, movie);" *ngFor="let like of movie.likes_fb | async">
+										<ion-icon [name] = "movie.isLikedAlready ? 'heart':'heart-outline'"></ion-icon>
+												{{like.likes}}
+									</button>
+
+							</ion-col>
+							<ion-col width-50>
+								<button ion-button clear item-right icon-left small>
+						<ion-icon name = "ios-chatboxes-outline"></ion-icon >
+						{{movie.comments_count}}
+				</button>
+							</ion-col>
+						</ion-row>
+					</ion-col>
+				</ion-row>
+			</ion-item>
+		</ion-list>
+		<ion-list *ngSwitchCase="'current'">
+			<div [ngSwitch]="movies">
+				<ion-item *ngFor="let movie of currentMoviesData" text-wrap (onload)="itemLoaded(movie.id)">
+					<ion-row onload="console.log('sample1');">
+						<ion-col width-30 onload="console.log('sample2');" (click)="showMovieDetails(movie.id,movie.release_date,'Releasing')">
+							<img src="http://image.tmdb.org/t/p/w185{{movie.poster_path}}" />
+						</ion-col>
+						<ion-col width-70>
+							<h2>{{movie.title}}</h2>
+							<button block clear color="dark" ion-button small><ion-icon ios="ios-calendar-outline" name='calendar'></ion-icon>&nbsp;Released on {{movie.release_date | date: 'dd MMM yy'}}</button>
+							<button block ion-button outline small (click)="openTrailerView($event,movie.id)"><ion-icon name='ios-play-outline'></ion-icon>&nbsp;Trailer</button>
+							<button block margin-top outline ion-button small (click)="showMovieDetails(movie.id,movie.release_date,'Released')"><ion-icon name='ios-information-circle-outline'></ion-icon>&nbsp;Details</button>
+							<ion-row no-padding>
+								<ion-col width-50>
+									<button ion-button clear item-right icon-left small (click)="postLikeForCurrentMovies(like.likes, movie);" *ngFor="let like of movie.likes_fb | async">
+										<ion-icon [name] = "movie.isLikedAlready ? 'heart':'heart-outline'"></ion-icon>
+												{{like.likes}}
+									</button>
+									<!--<button ion-button no-padding clear small icon-left color="black" (click)="postLike(like.likes, movie.id);" *ngFor = "let like of likesCount | async"> 
+				<ion-icon small [name]="likedIcon?'heart':'heart-outline'" [color]="likedIcon?'danger':'primary'"></ion-icon>
+					{{like.likes}} 
+				</button>-->
+
+								</ion-col>
+								<ion-col width-50>
+									<button ion-button clear item-right icon-left small>
+						<ion-icon name = "ios-chatboxes-outline"></ion-icon >
+						{{movie.comments_count}}
+				</button>
+								</ion-col>
+							</ion-row>
+						</ion-col>
+					</ion-row>
+				</ion-item>
+			</div>
+		</ion-list>
+		<ion-infinite-scroll (ionInfinite)="doInfinite($event,movies)">
+			<ion-infinite-scroll-content></ion-infinite-scroll-content>
+		</ion-infinite-scroll>
+	</div>
+	<ion-row text-center>
+		<ion-col>
+			<label>Movie data powered by TMDb</label>
+		</ion-col>
+	</ion-row>
+	<!--<ion-list *ngFor=" let movie of moviesData">
+		<ion-item>
+			<h1>{{movie.release_date}}</h1>
+						   <img src="http://image.tmdb.org/t/p/w185{{movie.poster_path}}" />
+		</ion-item>
+		</ion-list>-->
+</ion-content>

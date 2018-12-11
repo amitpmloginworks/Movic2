@@ -1,0 +1,37 @@
+page-home {
+.label-md,.label-ios {
+   margin:0em !important;
+}
+.card-background-page {
+
+  ion-card {
+    position: relative;
+    text-align: center;
+
+  }
+.backgroundtrans{
+    background-color:rgba(0,0,0,0.3);position: absolute;left: 0;
+    right: 0;
+    top: 0;bottom:0;
+  }
+  .card-title {
+    position: absolute;
+    top: 44%;
+    font-size: 1.7em;
+    width: 100%;
+    color: #fff;letter-spacing: 0.03em;
+  }
+}
+.text-input::-moz-placeholder {
+  color: white;
+}
+.text-input:-ms-input-placeholder {
+  color: white;
+}
+.text-input::-webkit-input-placeholder {
+  text-indent: 0;
+  color: white;
+}
+
+}
+

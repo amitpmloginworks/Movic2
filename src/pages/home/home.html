@@ -1,0 +1,168 @@
+<ion-header>
+  <!--<ion-navbar color="primary">
+    <ion-title>Movic</ion-title>
+  </ion-navbar>-->
+  <ion-navbar color="primary">
+    <ion-label color="light" style="font-size:18px;">{{title}}</ion-label>
+    <!--<ion-title>Movic <ion-icon name="md-share"  (click)="share(appUrl)"></ion-icon> </ion-title>-->
+    <!--<ion-row>
+      <ion-col width-80 text-center>
+         <ion-title>Movic</ion-title>
+      </ion-col>
+      <ion-col width-20 color="light">
+         <ion-icon color="light" name="md-share"  (click)="share(appUrl)"></ion-icon>
+      </ion-col>
+    </ion-row>-->
+    <!--
+   -->
+    <!--<ion-label><ion-icon name="ios-search"></ion-icon> </ion-label>-->
+    <!--<ion-input type="text" [(ngModel)]="searchInput"  placeholder="Search Movies..."  (click)="search(searchInput)" ></ion-input>-->
+    <!--<ion-searchbar
+  [(ngModel)]="myInput"
+  (ionInput)="onInput($event, myInput)">
+</ion-searchbar>-->
+
+  <ion-buttons end>
+    <button ion-button icon-only (click)="toggle()">
+    <ion-icon *ngIf="!toggled"  name="search"></ion-icon>
+    
+    </button>
+  </ion-buttons>
+
+  <ion-searchbar *ngIf="toggled" [(ngModel)]="enteredMovieName" 
+                                  (ionInput)="onInput($event)"
+                                 (keydown)="onKeyDown($event, enteredMovieName)"
+                                  (ionCancel)="cancelSearch($event)"
+                                  (ionClear)="cancelSearch($event)" 
+                                  [showCancelButton]="true">
+    </ion-searchbar>
+
+    <!--<ion-buttons end>
+      <button ion-button icon-only (click)="share(appUrl)">
+        <ion-icon name="md-share"></ion-icon>
+      </button>
+    </ion-buttons>-->
+    <ion-buttons end>
+      <button ion-button icon-only (click)="moreOptions()">
+  <ion-icon name="md-person"></ion-icon>
+</button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<!--<ion-content class="card-background-page" >
+                  
+  <ion-list no-lines no-padding>
+    <ion-item no-padding (click)="pushMoviesListPage()">
+      <ion-card no-padding>
+      <img src="assets/img/4.jpg"/>
+      <div class="card-title">HOLLYWOOD</div>
+      </ion-card>
+    </ion-item>
+    <ion-item no-padding (click)="pushMoviesListPage()">
+      <ion-card no-padding>
+      <img src="assets/img/2.jpg"/>
+      <div class="card-title">BOLLYWOOD</div>
+      </ion-card>
+    </ion-item>
+    <ion-item no-padding (click)="pushMoviesListPage()">
+      <ion-card no-padding>
+      <img src="assets/img/3.jpg"/>
+      <div class="card-title">SOUTH INDIAN</div>
+      </ion-card>
+    </ion-item>
+    <ion-item no-padding (click)="pushMoviesListPage()">
+      <ion-card no-padding>
+      <img src="assets/img/1.jpg"/>
+      <div class="card-title">3D MOVIES</div>
+      </ion-card>
+    </ion-item>
+  </ion-list>
+
+  
+</ion-content>-->
+
+
+
+
+<!--<ion-content class="card-background-page">
+  <ion-card (click)="pushMoviesListPage()">
+    <img src="assets/img/animated.png"/>
+	<div class="backgroundtrans"></div>
+    <div class="card-title">ALL MOVIES</div>
+  </ion-card>
+
+  <ion-card (click)="pushMoviesListPage()">
+    <img src="assets/img/american.png"/>
+	<div class="backgroundtrans"></div>
+    <div class="card-title">HOLLYWOOD MOVIES</div>
+  </ion-card>
+
+  <ion-card (click)="pushMoviesListPage()">
+    <img src="assets/img/bollywood.png"/>
+	<div class="backgroundtrans"></div>
+    <div class="card-title">INDIAN MOVIES</div>
+  </ion-card>
+
+  <ion-card (click)="pushMoviesListPage()">
+    <img src="assets/img/british.png"/>
+	<div class="backgroundtrans"></div>
+    <div class="card-title">BRITISH MOVIES</div>
+  </ion-card>
+  <ion-card (click)="pushMoviesListPage()">
+    <img src="assets/img/animated.png"/>
+	<div class="backgroundtrans"></div>
+    <div class="card-title">ALL MOVIES</div>
+  </ion-card>
+
+  <ion-card (click)="pushMoviesListPage()">
+    <img src="assets/img/american.png"/>
+	<div class="backgroundtrans"></div>
+    <div class="card-title">HOLLYWOOD MOVIES</div>
+  </ion-card>
+
+  <ion-card (click)="pushMoviesListPage()">
+    <img src="assets/img/bollywood.png"/>
+	<div class="backgroundtrans"></div>
+    <div class="card-title">INDIAN MOVIES</div>
+  </ion-card>
+
+  <ion-card (click)="pushMoviesListPage()">
+    <img src="assets/img/british.png"/>
+	<div class="backgroundtrans"></div>
+    <div class="card-title">BRITISH MOVIES</div>
+  </ion-card>
+</ion-content>-->
+
+
+<!--<ion-content>
+<ion-list no-lines no-padding>
+  <ion-item no-padding *ngFor="let language of languagesList" (click)="pushMoviesListPage(language)">
+      <ion-card no-padding>
+          <img src="{{language.banner}}"/>
+	        <div class="backgroundtrans"></div>
+          <div class="card-title">{{language.category}}</div>
+      </ion-card>
+  </ion-item>
+</ion-list>
+</ion-content>-->
+
+
+<ion-content class="card-background-page" no-padding overflow-scroll="true" >
+
+  <ion-list no-lines>
+    <ion-item no-padding *ngFor="let language of languagesList" (click)="pushMoviesListPage(language.code,language.category2)">
+      <ion-card>
+        <img src="{{language.banner}}" />
+        <div no-padding class="backgroundtrans"></div>
+        <div class="card-title">{{language.category}}</div>
+      </ion-card>
+    </ion-item>
+  </ion-list>
+  <ion-row text-center>
+    <ion-col>
+      <label>Movie data powered by TMDb</label>
+    </ion-col>
+  </ion-row>
+</ion-content>

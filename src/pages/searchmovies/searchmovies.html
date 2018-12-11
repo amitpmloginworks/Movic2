@@ -1,0 +1,69 @@
+<!--
+  Generated template for the SearchmoviesPage page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar text-center color='primary'>
+    <ion-title>Movic</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding >
+
+ <ion-list>
+  <ion-item  *ngFor="let post of searchMoviesData" (click)="movieDetails(post.id,post.release_date)" text-wrap >
+    <!--<h2 style="text-transform: capitalize" text:center text-wrap><strong>{{post.title}} </strong></h2>-->
+      <ion-card no-padding>
+        <img src="http://image.tmdb.org/t/p/w185{{post.backdrop_path}}" alt="image"/> 
+      </ion-card>
+      <ion-row text-wrap>
+        <ion-col col-7>
+          <h2 style="text-transform: capitalize"  text-wrap><strong>Title:{{post.title}} </strong></h2>
+        </ion-col>
+        <ion-col col-5>
+            <h2 style="text-transform: capitalize"  text-wrap><strong>{{post.release_date}} </strong></h2>
+        </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-12  text-wrap>
+            <h3 text-wrap><strong>Description: {{post.overview}}</strong></h3>
+          
+          </ion-col>
+        </ion-row>
+  </ion-item>
+</ion-list>
+<!--<ion-list >
+		<ion-item class="item" style="padding-top:6px;" *ngFor="let movie of searchMoviesData" text-wrap >
+		<ion-row >
+			<ion-col width-30  (click)="showMovieDetails(movie.id,movie.release_date,'Releasing')" >			
+			   <img src="http://image.tmdb.org/t/p/w185{{movie.poster_path}}" />			
+			</ion-col>
+			<ion-col width-70>
+				<h2>{{movie.title}}</h2>
+				<button block clear  color="dark" ion-button small><ion-icon ios="ios-calendar-outline" name='calendar'></ion-icon>&nbsp;Releasing on {{movie.release_date | date: 'dd MMM yy'}}</button>
+				<button block ion-button outline small (click)="openTrailerView($event,movie.id)"><ion-icon name='ios-play-outline'></ion-icon>&nbsp;Trailer</button>				
+				<button block margin-top outline ion-button small  (click)="showMovieDetails(movie.id,movie.release_date,'Releasing')"><ion-icon name='ios-information-circle-outline'></ion-icon>&nbsp;Details</button>
+				<ion-row no-padding>
+					<ion-col width-50>
+						<button ion-button  clear item-right icon-left small (click)="likeClicked($event);" *ngFor = "let like of movie.likes_fb | async">
+						<ion-icon name = "heart-outline"></ion-icon>
+						{{like.likes}}
+				</button>
+					</ion-col>
+					<ion-col width-50>
+				<button ion-button clear item-right icon-left small >
+						<ion-icon name = "ios-chatboxes-outline"></ion-icon >
+						{{movie.comments_count}}
+				</button>
+			</ion-col>
+				</ion-row>
+			</ion-col>
+		</ion-row>
+		</ion-item>
+</ion-list>-->
+</ion-content>

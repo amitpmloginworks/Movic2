@@ -1,0 +1,170 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title class="header-text">Movie Details</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+	
+	<ion-row wrap baseline >
+
+		<ion-col width-55 text-wrap >
+			<!--<label *ngIf="homePage==0"  color="primary">{{movieName}}</label>-->
+		<a  text-wrap style="text-decoration:none" href={{homePage}}><ion-label text-wrap>{{movieName}}</ion-label></a>
+		</ion-col>
+		<ion-col width-10 no-padding style="height:1.75em">
+             <!--<button ion-button clear small icon-left color="black" (click)="share(appUrl)">
+				 <ion-icon  name="md-share"></ion-icon>
+             </button>-->
+			   <!--<ion-fab  >
+    <button color="light" ion-fab mini class="fab"><ion-icon name="md-share"></ion-icon></button>
+    <ion-fab-list>
+      <button ion-fab ><ion-icon name="logo-facebook"  (click)="shareFacebook(appUrl)"></ion-icon></button>
+      <button ion-fab color="primary" ><ion-icon name="logo-twitter"  (click)="shareTwitter(appUrl)"></ion-icon></button>
+      <button ion-fab color="secondary"><ion-icon name="logo-whatsapp" (click)="shareWhatsapp(appUrl)"></ion-icon></button>
+    </ion-fab-list>
+  </ion-fab>-->
+			 </ion-col>
+		<ion-col text-right width-25 no-padding>
+			<button ion-button no-padding clear small icon-left color="black"> 
+				<ion-icon small name="time" ios="ios-time-outline"></ion-icon>
+					{{movieDuration}}
+				</button>					  						  
+		</ion-col>
+		<ion-col text-right width-10 no-padding>
+			<button ion-button no-padding clear small icon-left color="black" (click)="postLike(like.likes);" *ngFor = "let like of likesCount | async"> 
+				<ion-icon small [name]="likedIcon?'heart':'heart-outline'" [color]="likedIcon?'danger':'primary'"></ion-icon>
+					{{like.likes}} 
+				</button>
+		</ion-col>
+		</ion-row>
+		<ion-row>
+			<img class="fullimage" src="{{moviePoster}}"/>
+		</ion-row>		 
+		<ion-row>
+		 	<ion-col>
+				<p>{{movieDescription}}</p>
+			</ion-col>
+		 </ion-row>
+		<ion-row center class="bggrey">			
+			<button ion-button small full clear color="black">{{movieStatus}} on {{movieReleaseDate | date: 'dd MMM'}}</button>			
+		</ion-row>		  
+	
+<!--<ion-scroll scrollX="true" style="width:100%; height:170px">
+<ion-row>
+	<ion-col *ngFor="let cast of castDetails" width-40  >
+  <ion-item text-wrap no-lines no-padding  style="width:100px" (click)="navigateToCastDetails(cast.id)">
+	   <img  *ngIf="cast.profile_path==null"  style="width:650px;height:80px"   src="assets/img/alternate.png"  />
+	  <img *ngIf="cast.profile_path!=null"   style="width:650px;height:80px" src="http://image.tmdb.org/t/p/w185{{cast.profile_path}}"  />
+   <p><b>{{cast.name}}</b></p>
+  </ion-item>
+	</ion-col>
+</ion-row>
+</ion-scroll>-->
+
+		
+	
+	 	<ion-label ><b>Genre(s): </b>{{movieGenre}}</ion-label>  
+		<p text-wrap><b>Production House(s): </b>{{movieProductions}}</p>	
+		<ion-label><b>Crew and Cast:</b></ion-label>
+
+		<ion-scroll scrollX="true" style="width:100%; height:11.25em" no-padding >
+<ion-row>
+	<p *ngFor="let crew of castCombinedArray" style="padding:0px;margin:0px;">
+	<ion-col   width-50 no-padding>
+ <ion-item  text-wrap no-lines no-padding   style="width:6.25em"   (click)="navigateToCrewDetails(crew.id)">
+	   <!--<img  *ngIf="crew.profile_path==null"  style="width:650px;height:80px"   src="assets/img/alternate.png"  />-->
+	  <img  style="width:40.625em;height:6.25em" src="http://image.tmdb.org/t/p/w185{{crew.profile_path}}"  />
+   <p text-wrap><b>{{crew.job}}</b></p> 
+   <p text-wrap>{{crew.name}}</p> 
+  </ion-item>
+	</ion-col>
+	</p>
+</ion-row>
+</ion-scroll>
+<!--
+<ion-slides class="image-slider" loop='true'  slidesPerView="4" >
+<ion-slide *ngFor="let crew of castCombinedArray" style="width:50px;height:50px;" >
+	 <img style="width:400px;height:300px;" src="http://image.tmdb.org/t/p/w185{{crew.profile_path}}" class="thumb-img" imageViewer/>
+ <p text-wrap><b>{{crew.job}}</b></p> 
+   <p text-wrap>{{crew.name}}</p> 
+</ion-slide>
+</ion-slides>-->
+
+<!--
+<p><b>Crew</b></p>
+<ion-scroll scrollX="true" style="width:100%; height:200px">
+<ion-row>
+	<ion-col  *ngFor="let crew of crewDetails" width-40 >
+ <ion-item  text-wrap no-lines no-padding   style="width:100px"   (click)="navigateToCrewDetails(crew.id)">
+	   <img  *ngIf="crew.profile_path==null"  style="width:650px;height:80px"   src="assets/img/alternate.png"  />
+	  <img *ngIf="crew.profile_path!=null"   style="width:650px;height:80px" src="http://image.tmdb.org/t/p/w185{{crew.profile_path}}"  />
+   <p text-wrap><b>{{crew.job}}</b></p> 
+   <p text-wrap>{{crew.name}}</p> 
+  </ion-item>
+	</ion-col>
+</ion-row>
+</ion-scroll>-->
+
+		<ion-row>
+			<ion-col>
+				<button ion-button block padding icon-left  (click)="launch();"><ion-icon name="play"></ion-icon>Watch Trailer</button>
+			</ion-col>
+		</ion-row>
+		<hr />
+		<ion-row no-padding>
+			<ion-col no-padding text-center>
+				<h5 color="greyscale"><b>Add a Comment</b></h5>
+			</ion-col>
+		</ion-row>
+		<ion-item>
+    		<ion-input placeholder="Enter your name" type="text" value="" [(ngModel)]="userName" name="userName"></ion-input>
+  		</ion-item>
+  		<ion-item>
+   			<ion-textarea placeholder="Enter your comment" [(ngModel)]="userComment" name="userComment"></ion-textarea>
+ 		</ion-item>
+<!-- 		<input type="text" placeholder="Enter your name" class="input-class" [(ngModel)]="userName" name="userName"/>		
+		<textarea placeholder="Enter your comment" class="input-class" [(ngModel)]="userComment" name="userComment"></textarea> -->
+		<br />
+		<ion-row>
+			<ion-col>
+				<button ion-button icon-left block padding (click)="postComment(userName,userComment);userName = ''; userComment = '';"><ion-icon name="send"></ion-icon>Submit</button>		
+			</ion-col>
+		</ion-row>
+		<ion-row no-padding>
+			<ion-col no-padding text-center>
+				<h5 color="greyscale"><b>All Comments</b></h5>
+			</ion-col>
+		</ion-row>
+		<ion-list no-lines>
+    	      <ion-item *ngFor = "let comment of commentList | async">
+				<ion-card >
+					<ion-row>
+						<ion-col>
+							<button ion-button clear small icon-left color="black"> 
+								<ion-icon small name="contact"></ion-icon>
+								{{comment.name}}
+							</button>
+						</ion-col>
+						<ion-col text-right>
+							<button ion-button clear small color="greyscale" icon-left> 
+								<ion-icon small name="ios-time-outline"></ion-icon>
+								{{comment.commentTime | date: 'dd MMM yyyy'}}
+							</button>					
+						</ion-col>
+					</ion-row>												
+					<ion-card-content>
+						{{comment.comment}}
+					</ion-card-content>
+				</ion-card>          
+      </ion-item>
+		</ion-list>
+		<ion-row text-center>		
+			<ion-col>
+				<label>Movie data powered by TMDb</label>
+			</ion-col>
+		</ion-row>
+	</ion-content>
+
+
